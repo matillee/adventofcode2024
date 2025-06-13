@@ -1,6 +1,6 @@
 import pytest
 
-from python.historian_hysteria import (
+from day1.python.historian_hysteria import (
     NumberDistance,
     PuzzleInput,
 )

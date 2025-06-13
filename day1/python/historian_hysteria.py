@@ -22,7 +22,17 @@ class NumberDistance:
 
         return total_distance
 
+class NumberSimilarity:
+    # Create a mapping of numbers and number of occurrences in the second list
 
+    def get_number_similarity(self, first_number: int, second_list: List[int]) -> int:
+        return first_number * second_list.count(first_number)
+
+    def get_total_similarity(self, first_list: List[int], second_list: List[int]) -> int:
+        total_similarity = 0
+        for number in first_list:
+            total_similarity += self.get_number_similarity(number, second_list)
+        return total_similarity
 class PuzzleInput:
 
     def __init__(self, filename: str = "day1/puzzle_input"):
@@ -69,3 +79,13 @@ if __name__ == "__main__":
 
     distance = NumberDistance().get_total_distance(input.first_list, input.second_list)
     print(f"Total distance was {distance}")
+
+    similarity = NumberSimilarity().get_total_similarity(
+        [3, 4, 2, 1, 3, 3], [4, 3, 5, 3, 9, 3]
+    )
+    print(f"Total similarity was {similarity}")
+    input = PuzzleInput()
+
+    similarity = NumberSimilarity().get_total_similarity(input.first_list, input.second_list)
+    print(f"Total similarity was {similarity}")
+
