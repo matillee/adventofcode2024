@@ -1,0 +1,62 @@
+ while (number_of_blinks--)
+    {
+        pebbles_to_insert.clear();
+        print_pebbles();
+        std::cout << "Blinks left: " << number_of_blinks << std::endl;
+        for (auto &pebble : current_pebble_order)
+        {
+            auto result = pebble.apply_plutonian_pebble_rule();
+            if (result)
+            {
+                pebbles_to_insert.emplace_back()
+                // Insert new pebble in between the pebble the rule was applied to and the pebble before it.
+                // Find the index of the current pebble
+                auto idx = &pebble - &current_pebble_order[0];
+                // Insert the new pebble before the current pebble (between previous and current)
+                current_pebble_order.insert(current_pebble_order.begin() + idx, *result);
+                // Adjust idx to skip the newly inserted pebble
+                ++idx;
+            }
+        }
+    }
+    
+
+
+std::pair<size_t, size_t> PlutonianPebble::get_separated_numbers(size_t number_of_digits)
+{
+    std::cout << "Get separated numbers for " << engraved_number << std::endl;
+
+    // Update this pebble with last digits of engraved_number and create new pebble with the first digits.
+    auto new_pebble_number_1 = std::to_string(engraved_number).substr(0, number_of_digits / 2);
+    // This will not start with 0.
+
+    auto new_pebble_number_2 = std::to_string(engraved_number).substr(number_of_digits / 2, number_of_digits / 2);
+    // TODO: Remove 00
+    if (new_pebble_number_2.length() > 1)
+    {
+        for (size_t index = 0; index < new_pebble_number_2.length(); index++)
+        {
+            if (new_pebble_number_2[index] != '0')
+            {
+                auto substring_test = new_pebble_number_2.substr(index);
+                std::cout << substring_test << std::endl;
+                std::stringstream new_pebble_number_2_stream(substring_test);
+                new_pebble_number_2_stream >> engraved_number;
+                break;
+            }
+        }
+    }
+    else
+    {
+        std::cout << "TEST" << std::endl;
+        std::cout << "New engraved number str again: " << new_pebble_number_2 << std::endl;
+        std::stringstream new_pebble_number_2_stream(new_pebble_number_2);
+        new_pebble_number_2_stream >> engraved_number;
+    }
+
+    std::cout << "New engraved number int: " << engraved_number << std::endl;
+
+    std::stringstream new_pebble_number_1_stream(new_pebble_number_1);
+    size_t new_pebble_number;
+    new_pebble_number_1_stream >> new_pebble_number;
+}
