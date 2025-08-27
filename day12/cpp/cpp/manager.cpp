@@ -31,8 +31,7 @@ std::vector<std::vector<char>> ManagerClass::read_input(const std::string &filen
     {
         if (!line.empty())
         {
-            garden.emplace_back(line);
-
+            garden.emplace_back(line.begin(), line.end());
         }
     }
     if (garden.empty())
@@ -46,7 +45,7 @@ std::vector<std::vector<char>> ManagerClass::read_input(const std::string &filen
  * @brief Returns the fence pricing calculated by the gardener.
  * @return The fence pricing as a size_t integer.
  */
-size_t ManagerClass::get_fence_pricing()
+size_t ManagerClass::get_fence_pricing(bool with_sides)
 {
-    return gardener.get_fence_pricing();
+    return gardener.get_fence_pricing(with_sides);
 }

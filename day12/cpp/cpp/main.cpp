@@ -16,12 +16,14 @@ int main(int argc, char *argv[])
     else if (argc < 2)
     {
         filename = "../puzzle_input";
-        filename = "../small_puzzle_input";
+        //filename = "../small_puzzle_input";
+        //filename = "../smaller_puzzle_input_x";
         std::cout << "No input file provided. Using default filename " << filename << "\n";
     }
 
-    auto score = ManagerClass(filename).get_fence_pricing();
+    auto score = ManagerClass(filename).get_fence_pricing(false);
     std::cout << "Part One: " << score << std::endl << std::endl << std::endl;
 
-    //std::cout << "Part Two: " << sum << "\n";
+    auto sum = ManagerClass(filename).get_fence_pricing(true);
+    std::cout << "Part Two: " << sum << "\n";
 }
